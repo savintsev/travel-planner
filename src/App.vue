@@ -48,7 +48,7 @@ body {
     font-size: 16px;
     line-height: 1.4;
     background: #fff;
-    color: #6b95e0;
+    color: #4a77bf;
 }
 
 .main {

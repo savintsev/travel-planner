@@ -13,8 +13,12 @@ export default {
 <style lang="scss">
 .footer {
     margin: 0;
-    padding: 0;
+    padding: 1em;
     background: #6b95e0;
     color: #fff;
+
+    & > p {
+        font-size: 0.875em;
+    }
 }
 </style>

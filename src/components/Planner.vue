@@ -1,17 +1,26 @@
 <template lang="pug">
-    .planner 123
+    .planner
+        Route
+        Countries
 
 </template>
 
 <script>
 export default {
-    name: 'Planner'
+    name: 'Planner',
+
+    components: {
+        Route: () => import('@/components/Planner/Route'),
+        Countries: () => import('@/components/Planner/Countries')
+    }
 };
 </script>
 
 <style lang="scss">
 .planner {
     flex-grow: 1;
+    display: flex;
+    flex-direction: row;
     margin: 0;
 }
 </style>
