@@ -1,0 +1,11 @@
+{
+    "name": "Travel Planner",
+    "short_name": "TP",
+    "description": "Test travel planner for renlife",
+    "theme_color": "#6b95e0",
+    "background_color": "#6b95e0",
+    "start_url": ".",
+    "display": "standalone",
+    "orientation": "portrait",
+    "icons": []
+}

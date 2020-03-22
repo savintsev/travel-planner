@@ -2,6 +2,19 @@
   "name": "travel-planner",
   "version": "0.1.0",
   "private": true,
+  "main": "src/main.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:savintsev/travel-planner.git"
+  },
+  "keywords": [
+    "travel",
+    "planner",
+    "renlife"
+  ],
+  "author": "Egor Savintsev",
+  "license": "MIT",
+  "description": "Test travel planner for renlife",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -24,9 +37,15 @@
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/test-utils": "1.0.0-beta.31",
     "babel-eslint": "^10.0.3",
+    "backpack.css": "^2.0.0",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^6.1.2",
+    "postcss-custom-media": "^7.0.8",
+    "postcss-flexbugs-fixes": "^4.2.0",
+    "postcss-import": "^12.0.1",
+    "postcss-initial": "^3.0.2",
+    "postcss-preset-env": "^6.7.0",
     "prettier": "^1.19.1",
     "sass": "^1.25.0",
     "sass-loader": "^8.0.2",
@@ -46,7 +65,19 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {},
+    "rules": {
+      "prettier/prettier": [
+        "warn",
+        {
+          "printWidth": 160,
+          "tabWidth": 4,
+          "singleQuote": true,
+          "trailingComma": "none",
+          "bracketSpacing": false,
+          "jsxBracketSameLine": true
+        }
+      ]
+    },
     "overrides": [
       {
         "files": [
@@ -59,9 +90,19 @@
       }
     ]
   },
+  "postcss": {
+    "plugins": {
+      "postcss-import": {},
+      "postcss-initial": {},
+      "postcss-flexbugs-fixes": {},
+      "postcss-custom-media": {},
+      "postcss-preset-env": {},
+      "autoprefixer": {}
+    }
+  },
   "browserslist": [
-    "> 1%",
-    "last 2 versions"
+    "> 0.25%",
+    "IE 11"
   ],
   "jest": {
     "preset": "@vue/cli-plugin-unit-jest"

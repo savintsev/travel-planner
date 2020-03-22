@@ -1,28 +1,65 @@
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+<template lang="pug">
+    main.main
+        HeaderComponent
+
+        Planner
+
+        FooterComponent
+
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-
 export default {
-  name: "App",
-  components: {
-    HelloWorld
-  }
+    name: 'App',
+
+    components: {
+        HeaderComponent: () => import('@/components/HeaderComponent'),
+        FooterComponent: () => import('@/components/FooterComponent'),
+        Planner: () => import('@/components/Planner')
+    }
 };
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+/* reduce motion */
+@media screen and (prefers-reduced-motion: reduce), (update: slow) {
+    * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+}
+
+/* start animation when js loaded */
+body.js-loading *,
+body.js-loading *::before,
+body.js-loading *::after {
+    animation-play-state: paused !important;
+}
+
+/* main styles */
+body {
+    scroll-behavior: smooth;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-family: inherit;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.4;
+    background: #fff;
+    color: #6b95e0;
+}
+
+.main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding-top: constant(safe-area-inset-top);
+    padding-right: constant(safe-area-inset-right);
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-left: constant(safe-area-inset-left);
 }
 </style>
