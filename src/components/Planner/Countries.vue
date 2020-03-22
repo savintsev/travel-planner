@@ -4,7 +4,7 @@
 
         .countries__container
 
-            ul.countries__list
+            ul.countries__list(@click='clickOnList')
 
                 li.countries__item(
                     v-for='countryItem in countries',
@@ -13,27 +13,80 @@
 
                     img.countries__flag(
                         :src='require("@/assets/flags/" + countryItem.code.toLowerCase() + ".svg")',
-                        alt='',
+                        alt='flag',
                         width='32',
                         loading='lazy'
                         )
 
                     h3.countries__name {{countryItem.name}}
 
-                    button.countries__button(type='button') Start
-                    button.countries__button(type='button') Medium
-                    button.countries__button(type='button') End
+                    button.countries__button(
+                        type='button',
+                        data-type='start',
+                        :data-code='countryItem.code',
+                        :disabled='isStartSet'
+                        ) Start
+
+                    button.countries__button(
+                        type='button',
+                        data-type='medium',
+                        :data-code='countryItem.code',
+                        :disabled='!isStartSet || isEndSet || isInRoute(countryItem.code)'
+                        ) Medium
+
+                    button.countries__button(
+                        type='button',
+                        data-type='end',
+                        :data-code='countryItem.code',
+                        :disabled='!isStartSet || isEndSet || isInRoute(countryItem.code)'
+                        ) End
 
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import {mapState, mapActions} from 'vuex';
 
 export default {
     name: 'Countries',
 
     computed: {
-        ...mapState(['countries'])
+        ...mapState(['countries', 'route']),
+
+        isStartSet() {
+            return this.route.length > 0 ? true : false;
+        },
+
+        isEndSet() {
+            const lastRoute = this.route[this.route.length - 1];
+            return lastRoute && lastRoute.end;
+        }
+    },
+
+    methods: {
+        ...mapActions(['setStart', 'setMedium', 'setEnd']),
+
+        clickOnList(e) {
+            const target = e.target;
+
+            if (target.tagName === 'BUTTON' && target.dataset.type && target.dataset.code) {
+                if (target.dataset.type === 'start') {
+                    this.setStart(target.dataset.code);
+                }
+
+                if (target.dataset.type === 'medium') {
+                    this.setMedium(target.dataset.code);
+                }
+
+                if (target.dataset.type === 'end') {
+                    this.setEnd(target.dataset.code);
+                }
+            }
+        },
+
+        isInRoute(code) {
+            const countryIndex = this.route.findIndex(item => item.code === code);
+            return countryIndex === -1 ? false : true;
+        }
     }
 };
 </script>
@@ -47,6 +100,10 @@ export default {
     padding: 1em;
     background: #4a77bf;
     color: #fff;
+
+    @media (max-width: 768px) {
+        flex-grow: 1;
+    }
 
     &__title {
         margin: 0 0 0.5em;
@@ -72,6 +129,7 @@ export default {
     &__item {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
         align-items: center;
         margin: 0;
 
